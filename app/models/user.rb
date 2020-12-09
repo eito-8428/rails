@@ -11,8 +11,14 @@ class User < ApplicationRecord
   validates :password, presence: true,
             format: { with: VALID_PASSWORD_REGEX,
              message: "は半角8~32文字小文字・数字それぞれ１文字以上含む必要があります"}
+             
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
   
   has_secure_password
   
-  
+  has_many :topics
+  has_many :favorites
+  has_many :favorite_topics, through: :favorites, source: 'topic'
 end
